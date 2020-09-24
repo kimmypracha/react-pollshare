@@ -1,0 +1,28 @@
+{
+  "name": "pollshare-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+  "build": "next build",
+  "start": "next start -p $PORT",
+  "heroku-postbuild": "npm run build",
+  "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "firebase": "^7.17.1",
+    "firebase-admin": "^9.0.0",
+    "formik": "^2.1.5",
+    "gsap": "^3.4.2",
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-gsap": "^2.2.1",
+    "react-scripts": "^3.4.1"
+  }
+}

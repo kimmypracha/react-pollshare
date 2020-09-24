@@ -1,0 +1,29 @@
+
+.info {
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px #ececec;
+    margin-top: 30px;
+    position: relative;
+}
+.info p {
+    color: #898e90;
+    font-size: 0.9em;
+    margin: 5px 10px;
+}
+.info p.sub {
+    font-size: .7em;
+    margin-top: 7px;
+    opacity: .5;
+    line-height: 1;
+}
+.info p a {
+    color: #6c5dff;
+    text-decoration: none;
+    opacity: .8;
+}
+.info p a:hover {
+    opacity: 1;
+}
+
