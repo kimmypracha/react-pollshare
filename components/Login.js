@@ -13,9 +13,6 @@ function Login(){
                         dispatch({type:'signin',
                                   username: values.username,
                                   password: values.password});
-                        console.log('submit work!');
-                        console.log('The value is : ');
-                        console.log(JSON.stringify(values,null,2));
                         Router.push('/profile');
                     }}>
             {({values,handleSubmit})=>(
