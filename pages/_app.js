@@ -8,11 +8,14 @@ const initialState = {
   currentPoll : null
 }
 const reducer = (state,action) => {
+  console.log("Reducer here!");
+  console.log(state);
+  console.log(action);
   switch(action.type){
     case 'signin' : 
-      return {username : action.username, password : action.password, ...state}
+      return {...state, username : action.username, password : action.password}
     case 'signout' :
-      return {username : '', password : '', ...state}
+      return {...state, username : '', password : ''}
     case 'selectpoll' :
       return {...state, currentPoll: action.currentPoll}
     case 'clearpoll' :
