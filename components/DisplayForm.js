@@ -60,6 +60,7 @@ function Choice({type, name, options, ...props}){
               />);
 } 
 function DisplayForm({value}){
+ if(value === null) return <h1> This page is unavailable</h1>;
  const topic = value.topic;
  const questions = value.questions;
  console.log("Test Questions!");

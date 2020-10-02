@@ -4,6 +4,6 @@ import { useContext } from 'react';
 import UserContext from '../context/UserContext';
 export default () => {
     const {userData, dispatch} = useContext(UserContext);
-    return (<DisplayForm value={userData.currentPoll}/>)
+    return (<main><DisplayForm value={userData.currentPoll}/></main>)
     //return (<h1> {JSON.stringify(userData.currentPoll,null,2)}</h1>)
 }
