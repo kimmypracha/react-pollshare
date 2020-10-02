@@ -1,14 +1,12 @@
 import { Field, Formik , Form} from "formik";
 import {RadioGroup,FormControlLabel,FormGroup, Radio, Checkbox} from '@material-ui/core';
+import Router from 'next/router';
 function FormikAnswerGroup({
     name,
     options,
     control,
     ...props
 }){
-    console.log("In FormikGroup");
-    console.log(options);
-    console.log(name);
     if(control == 'radio'){
         const choices = options.map((choice,index) => (
             <FormControlLabel 
@@ -45,8 +43,6 @@ function FormikAnswerGroup({
     )
 }
 function Choice({type, name, options, ...props}){
-    console.log("In Choice !");
-    console.log(options);
     if(type=='radio')
         return (
               <FormikAnswerGroup name={name}
@@ -63,10 +59,9 @@ function DisplayForm({value}){
  if(value === null) return <h1> This page is unavailable</h1>;
  const topic = value.topic;
  const questions = value.questions;
- console.log("Test Questions!");
- console.log(questions);
  const answerValue = questions.map((qData,index) => {
-     return qData.choices[0].answer;
+     if(qData.type === 'radio') return {values : ''};
+     return {values: []}
  });
   return(<div>
     <h1> {topic} </h1>
@@ -74,23 +69,32 @@ function DisplayForm({value}){
     <hr/>
     <Formik 
     initialValues={{
-        answers : answerValue
+        answers : answerValue,
+        textH : "hello"
     }}
-    onSubmit= {() =>{
-        alert(JSON.stringify(answers,null,2));
+    onSubmit= {(values) =>{
+        console.log("Submit!");
+        console.log(values.answers);
+        //alert(JSON.stringify(answers,null,2));
     }}>
         {props => (
+            <React.Fragment>
             <Form>
                 {questions.map((qData,index) => (
                     <React.Fragment>
                         <h1>{qData.topic}</h1>
                         <Choice type={qData.type}
-                                name={`answers.${index}`}
+                                name={`answers.${index}.values`}
                                 options = {qData.choices} 
                                 {...props} />
                     </React.Fragment>
                 ))}
             </Form>
+            <footer style={{'margin-top':'0px'}}>
+            <a value='cancel' onClick={()=>Router.back()}>Cancel</a>
+            <a value='' onClick={props.handleSubmit}>Submit</a>
+            </footer>
+            </React.Fragment>
         )}
     </Formik>
 </div>)
