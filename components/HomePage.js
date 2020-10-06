@@ -114,7 +114,7 @@ export default () => {
     </div>
     <Button onClick={()=>Router.push('/createpoll')}>Create a Poll</Button>
     <List>
-    <PollList filter={(data)=>data.type==='public'}/>
+    <PollList filter={(data)=>data.type==='public'} chart={false}/>
     </List>
     </div>
     )

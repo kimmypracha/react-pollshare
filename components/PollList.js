@@ -20,7 +20,7 @@ export default (props) => {
         displayPoll = poll.filter(props.filter).map(data => {
             console.log(data);
             console.log("Change Display Please!");
-            return (<ListComponent data={data}/>);
+            return (<ListComponent data={data} chart={props.chart}/>);
         });
         console.log(displayPoll);
     }else{
@@ -31,7 +31,6 @@ export default (props) => {
             <List>
              {displayPoll}
             </List>
-            <button onClick={()=>{console.log(poll)}}> Refresh </button>
         </div>
     )
 }

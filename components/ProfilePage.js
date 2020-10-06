@@ -12,7 +12,7 @@ export default () => {
         </div>
         <div>
             <ul>
-                <PollList filter={(data)=>data.createdBy===userData.username}/>
+                <PollList filter={(data)=>data.createdBy===userData.username} chart={true}/>
             </ul>
         </div>
     </div>

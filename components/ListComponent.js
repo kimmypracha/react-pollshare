@@ -22,7 +22,10 @@ export default (props) => {
     <ListItem button component="a" onClick={() => {
         dispatch({type: 'selectpoll',
                   currentPoll : props.data});
-        router.push('/displayPage');
+        if(props.chart)router.push('/chartPage');
+        else {
+            router.push('/displayPage');
+        }
     }}>
         <ListItemText primary={props.data.topic} secondary={props.data.createdBy}/>
     </ListItem>
