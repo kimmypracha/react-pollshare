@@ -10,7 +10,7 @@ export default (props) => {
         db.collection('poll')
           .get()
           .then(snapshot => {
-              const data = snapshot.docs.map(doc => doc.data());
+              const data = snapshot.docs.map(doc => ({id:doc.id , ...doc.data()}));
               console.log(data);
               setPoll(data);
           })

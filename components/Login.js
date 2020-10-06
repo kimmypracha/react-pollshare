@@ -32,7 +32,6 @@ function Login(){
             <p className="submit">
             <input type="button" name="commit" value="Login" onClick={handleSubmit} />
             </p>
-            <pre> {JSON.stringify(userData,null,2)}</pre>
             </div>)}
             </Formik>
         );
