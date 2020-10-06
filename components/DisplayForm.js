@@ -1,6 +1,14 @@
 import { Field, Formik , Form} from "formik";
 import {RadioGroup,FormControlLabel,FormGroup, Radio, Checkbox} from '@material-ui/core';
 import Router from 'next/router';
+import {useContext} from 'react';
+import UserContext from '../context/UserContext';
+import voteForm from '../services/voteForm';
+const scrollStyle = {
+    overflow: 'auto',
+    height: '350px',
+    marginTop:'20px'
+}
 function FormikAnswerGroup({
     name,
     options,
@@ -16,10 +24,9 @@ function FormikAnswerGroup({
                  }
              />
         ));
-        console.log(choices);
+ //       console.log(choices);
         return (
             <div>
-                <h1>Hello </h1>
                 <RadioGroup>
                     {choices}
                 </RadioGroup>
@@ -28,7 +35,6 @@ function FormikAnswerGroup({
     }
     return (
         <FormGroup>
-            <h1>Hi!</h1>
             {
                 options.map((choice,index) => (
                     <FormControlLabel 
@@ -57,6 +63,7 @@ function Choice({type, name, options, ...props}){
 } 
 function DisplayForm({value}){
  if(value === null) return <h1> This page is unavailable</h1>;
+ const {userData,dispatch} = useContext(UserContext);
  const topic = value.topic;
  const questions = value.questions;
  const answerValue = questions.map((qData,index) => {
@@ -69,16 +76,20 @@ function DisplayForm({value}){
     <hr/>
     <Formik 
     initialValues={{
-        answers : answerValue,
-        textH : "hello"
+        username: userData.username,
+        answers : answerValue
     }}
     onSubmit= {(values) =>{
         console.log("Submit!");
         console.log(values.answers);
         //alert(JSON.stringify(answers,null,2));
+        voteForm(value,values);
+        alert("You have completed the survey.");
+        Router.push('/profile');
     }}>
         {props => (
             <React.Fragment>
+            <div style={scrollStyle}>
             <Form>
                 {questions.map((qData,index) => (
                     <React.Fragment>
@@ -90,7 +101,8 @@ function DisplayForm({value}){
                     </React.Fragment>
                 ))}
             </Form>
-            <footer style={{'margin-top':'0px'}}>
+            </div>
+            <footer style={{'margin-top':'20px'}}>
             <a value='cancel' onClick={()=>Router.back()}>Cancel</a>
             <a value='' onClick={props.handleSubmit}>Submit</a>
             </footer>
