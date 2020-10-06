@@ -51,7 +51,8 @@ export default () => {
                 topic: '',
                 type: 'radio',
                 choices: [{
-                    answer : ''
+                    answer : '',
+                    count : 0
                 }]
             }]
              }}
