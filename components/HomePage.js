@@ -3,6 +3,11 @@ import TweenMax from 'gsap';
 import PollList from './PollList';
 import { Button, List } from '@material-ui/core';
 import Router from 'next/router';
+const scrollStyle = {
+    overflow: 'auto',
+    height: '200px',
+    marginTop:'20px'
+}
 function Topic(props){
     return (
         <a href="#" className={"scroll-item"+props.color} ref={props.pref}>
@@ -113,9 +118,11 @@ export default () => {
         <button className="scroll-btn next" onClick={nextBtn} disabled={next}></button>
     </div>
     <Button onClick={()=>Router.push('/createpoll')}>Create a Poll</Button>
+    <div style={scrollStyle}>
     <List>
     <PollList filter={(data)=>data.type==='public'} chart={false}/>
     </List>
+    </div>
     </div>
     )
 }

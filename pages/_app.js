@@ -1,7 +1,7 @@
 import './main.css';
 import UserContext from '../context/UserContext';
 import { useReducer } from 'react';
-
+import * as serviceworker from '../public/serviceworker';
 const initialState = {
   username : '',
   password : '',
@@ -28,4 +28,4 @@ export default function MyApp({ Component, pageProps }) {
     <UserContext.Provider value = {{userData,dispatch}}>
     <Component {...pageProps} />
     </UserContext.Provider>)
-  }
+}
