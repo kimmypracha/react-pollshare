@@ -2,7 +2,7 @@
     "name": "Pollshare",
     "short_name": "Pollshare",
     "icons": [{
-        "src": "/public/icons/pwa-192x192.png",
+        "src": "icons/pwa-192x192.png",
         "sizes": "192x192",
         "type": "image/png"
       },
