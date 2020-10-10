@@ -71,3 +71,4 @@ node_modules/
 public/workbox-*.js
 public/serviceworker.js
 public/public/
+.DS_Store
