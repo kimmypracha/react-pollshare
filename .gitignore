@@ -67,3 +67,7 @@ node_modules/
 node_modules/
 
 .next/
+
+public/workbox-*.js
+public/serviceworker.js
+public/public/
