@@ -80,6 +80,7 @@ main h1 {
     white-space: normal;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 .scroll-item.red {
     background-image: linear-gradient(130deg,#ff8063,#e34040);
