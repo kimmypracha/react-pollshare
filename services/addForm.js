@@ -4,7 +4,8 @@ async function addForm(value,username){
         ...value,
         createdAt : Date.now(),
         createdBy : username,
-        voted: 0
+        voted: 0,
+        voter: []
     }
     console.log(JSON.stringify(value,null,2));
     const res = await db.collection('poll').add(value);
