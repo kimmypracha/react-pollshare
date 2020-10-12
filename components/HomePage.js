@@ -10,7 +10,7 @@ const scrollStyle = {
 }
 function Topic(props){
     return (
-        <a href="#" className={"scroll-item"+props.color} ref={props.pref}>
+        <a onClick={()=>props.setType(props.name)} className={"scroll-item"+props.color} ref={props.pref}>
                     <h2>{props.name}</h2>
                     <span className="scroll-item-date"></span>
         </a>
@@ -19,15 +19,21 @@ function Topic(props){
 export default () => {
     const genre = ['Education','Lifestyle','Music','Food','Shop','Art','Sports','TV&Movies','Other'];
     const colors = ['',' red',' bees',' blue'];
+    const [Type, setGenre] = useState("Education");
     const scrollItems = genre.map((value)=>{
         return useRef(null);
     })
     const items = genre.map((value, index)=>{
-        return (<Topic key={index} name={value} color={colors[index%4]} pref={scrollItems[index]}/>)
+        return (<Topic key={index} 
+                       name={value}
+                       color={colors[index%4]}
+                       pref={scrollItems[index]}
+                       setType={setGenre}/>)
     });
     const [pos, setPos] = useState(0);
     const [prev, setPrev] = useState(true);
     const [next, setNext] = useState(false);
+    
     const wrapper = useRef(null);
     const el = useRef(null);
     const filler = useRef(null);
@@ -100,7 +106,7 @@ export default () => {
     return (
         <div>
         <div className='header-app'>
-        <h1>Home</h1>
+        <h1>Genre : {Type}</h1>
         </div>  
         <div className="scroll-wrapper" ref={wrapper}>
         <div className="scroll-filler" ref={filler}></div>
@@ -120,7 +126,7 @@ export default () => {
     <Button onClick={()=>Router.push('/createpoll')}>Create a Poll</Button>
     <div style={scrollStyle}>
     <List>
-    <PollList filter={(data)=>data.type==='public'} chart={false}/>
+    <PollList filter={(data)=>data.type==='public'&&data.genre===Type} chart={false}/>
     </List>
     </div>
     </div>
