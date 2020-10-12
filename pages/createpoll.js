@@ -47,6 +47,7 @@ export default () => {
         <Formik initialValues={{
             topic : '',
             type: 'private',
+            genre: 'Education',
             questions : [{
                 topic: '',
                 type: 'radio',
@@ -75,6 +76,20 @@ export default () => {
                         <Field labelId='ptype' name='type' as={Select}>
                             <MenuItem value='private'> Private </MenuItem>
                             <MenuItem value='public'> Public </MenuItem>
+                        </Field>
+                     </FormControl>
+                     <FormControl style={stdSize}>
+                        <InputLabel id='pgenre'>Genre</InputLabel>
+                        <Field labelId='pgenre' name='genre' as={Select}>
+                            <MenuItem value='Education'> Education </MenuItem>
+                            <MenuItem value='Lifestyle'> Lifestyle </MenuItem>
+                            <MenuItem value='Music'> Music </MenuItem>
+                            <MenuItem value='Food'> Food </MenuItem>
+                            <MenuItem value='Shop'> Shop </MenuItem>
+                            <MenuItem value='Art'> Art </MenuItem>
+                            <MenuItem value='Sports'> Sports </MenuItem>
+                            <MenuItem value='TV&Movies'> TV&Movies </MenuItem>
+                            <MenuItem value='Other'> Other </MenuItem>
                         </Field>
                      </FormControl>
                     <FieldArray name='questions'>
