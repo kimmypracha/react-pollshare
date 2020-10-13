@@ -19,6 +19,7 @@ export default (props) => {
     const router = useRouter();
     const {userData,dispatch} = useContext(UserContext);
     var status = "";
+    if(props.data.voter === null)props.data.voter = [];
     if(props.data.voter.includes(userData.username)){
         status = " (voted)"
     }
