@@ -1,5 +1,8 @@
 import {Pie} from 'react-chartjs-2';
 import Router from 'next/router';
+import { TextField ,Button} from '@material-ui/core';
+import {Formik, Form ,Field} from 'formik';
+import {useState, useReducer} from 'react';
 const scrollStyle = {
     overflow: 'auto',
     height: '350px',
@@ -14,15 +17,18 @@ function ChartComponent({count,label}){
 }
 function DisplayChart({value}){
     if(value === null) return <h1> This page is unavailable</h1>;
+    const [startTime, setStart] = useState(value.createdAt);
+    const [endTime, setEnd] = useState(Date.now());
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
     const topic = value.topic;
- const questions = value.questions;
- const chartList = questions.map((qData)=>{
-     const count = qData.choices.map((item)=>item.count);
-     const label = qData.choices.map((item)=>item.answer);
-     const datasets = [{
+    const questions = value.questions;
+    const chartList = questions.map((qData)=>{
+    const count = qData.choices.map((item)=>item.history.filter((t)=> (startTime<=t && t<=endTime)).length);
+    const label = qData.choices.map((item)=>item.answer);
+    const datasets = [{
          data : count,
          backgroundColor: ['yellow','blue','pink','green','orange','red','purple','brown','gray']
-     }]
+    }]
      console.log("Display Chart!");
      console.log(datasets);
      return (
@@ -36,6 +42,28 @@ function DisplayChart({value}){
   return(<div>
     <h1> {topic} </h1>
     <h2> {value.createdBy} </h2>
+    <Formik initialValues={
+            {
+                start: new Date(startTime).toISOString().slice(0,10), // Date Format
+                end : new Date(endTime).toISOString().slice(0,10) // Date Format
+            }
+        }
+               onSubmit={
+                   (values)=>{
+                      setStart(new Date(values.start).getTime()); // timestamp
+                      setEnd(new Date(values.end).getTime());// timestamp
+                      forceUpdate();
+                      console.log("Set Time Value!");
+                   }
+               }>
+            {({handleSubmit})=>(
+            <Form>
+                <Field label='Start' name='start' type='date' as={TextField}/>
+                <Field label='End' name='end' type='date' as={TextField}/>
+                <Button onClick={handleSubmit}> Submit </Button>
+            </Form>)
+            }
+        </Formik>
     <hr/>
     <div style={scrollStyle}>
          {chartList}

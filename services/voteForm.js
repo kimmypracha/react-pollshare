@@ -8,10 +8,12 @@ async function voteForm(data, values){ // topic, username, answers
         if(typeof values.answers[index].values === 'string'){
         var idx = element.choices.findIndex((value)=> value.answer === values.answers[index].values)
         arr[index].choices[idx].count += 1; // Edit this later
+        arr[index].choices[idx].history.push(Date.now());
         }else{
          values.answers[index].values.forEach((item)=>{
              var idx = element.choices.findIndex((value)=> value.answer === item);
              arr[index].choices[idx].count += 1; // Edit this later for same
+             arr[index].choices[idx].history.push(Date.now());
          })
         }
     });

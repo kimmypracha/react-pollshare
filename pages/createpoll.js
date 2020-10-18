@@ -13,13 +13,17 @@ function RemovableInput(props){
         </div>
     )
 }
+const answerTemplate = {
+    answer : '',
+    count: 0,
+    history: []
+}
 const questionTemplate = {
     topic: '',
     type: 'radio',
-    choices: [{
-        answer : ''
-    }]
+    choices: [answerTemplate]
 };
+
 const styles = {
     position : 'absolute',
     left : '50%',
@@ -53,7 +57,8 @@ export default () => {
                 type: 'radio',
                 choices: [{
                     answer : '',
-                    count : 0
+                    count : 0,
+                    history: []
                 }]
             }]
              }}
@@ -123,7 +128,7 @@ export default () => {
                                                                              onRemove={()=>remove(aindex)}
                                                                              />
                                                          ))}
-                                                         <Button color='primary' onClick={()=>push({answer:''})}>Add Answer</Button>
+                                                         <Button color='primary' onClick={()=>push(answerTemplate)}>Add Answer</Button>
                                                      </div>
                                                  )
                                              }}

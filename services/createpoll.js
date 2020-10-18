@@ -17,7 +17,9 @@ const questionTemplate = {
     topic: '',
     type: 'radio',
     choices: [{
-        answer : ''
+        answer : '',
+        count: 0,
+        history: []
     }]
 };
 const styles = {
@@ -52,7 +54,8 @@ export default () => {
                 type: 'radio',
                 choices: [{
                     answer : '',
-                    count : 0
+                    count : 0,
+                    history: []
                 }]
             }]
              }}
