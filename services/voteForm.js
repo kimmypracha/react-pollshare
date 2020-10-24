@@ -18,7 +18,10 @@ async function voteForm(data, values){ // topic, username, answers
         }
     });
     data.voted += 1;
-    data.voter.push(values.username);
+    data.voter.push({
+        user: values.username,
+        date: Date.now()
+    });
     const id = data.id;
     console.log("Before delete");
     console.log(JSON.stringify(data,null,2));

@@ -5,8 +5,11 @@ import {Formik, Form ,Field} from 'formik';
 import {useState, useReducer} from 'react';
 const scrollStyle = {
     overflow: 'auto',
-    height: '350px',
-    marginTop:'20px'
+    height: '270px',
+    marginTop:'10px'
+}
+const rightStyle = {
+    float : 'right'
 }
 function ChartComponent({count,label}){
   return <Pie 
@@ -19,9 +22,11 @@ function DisplayChart({value}){
     if(value === null) return <h1> This page is unavailable</h1>;
     const [startTime, setStart] = useState(value.createdAt);
     const [endTime, setEnd] = useState(Date.now());
-    const [, forceUpdate] = useReducer(x => x + 1, 0);
+    const [votecnt, setcnt] = useState(value.voted);
+    //const [, forceUpdate] = useReducer(x => x + 1, 0);
     const topic = value.topic;
     const questions = value.questions;
+    const voter = value.voter;
     const chartList = questions.map((qData)=>{
     const count = qData.choices.map((item)=>item.history.filter((t)=> (startTime<=t && t<=endTime)).length);
     const label = qData.choices.map((item)=>item.answer);
@@ -41,7 +46,10 @@ function DisplayChart({value}){
  })
   return(<div>
     <h1> {topic} </h1>
-    <h2> {value.createdBy} </h2>
+    <h3>
+    <span> By {value.createdBy} </span>
+    <span style={rightStyle}>  Voted : {votecnt} </span>
+    </h3>
     <Formik initialValues={
             {
                 start: new Date(startTime).toISOString().slice(0,10), // Date Format
@@ -52,7 +60,8 @@ function DisplayChart({value}){
                    (values)=>{
                       setStart(new Date(values.start).getTime()); // timestamp
                       setEnd(new Date(values.end).getTime());// timestamp
-                      forceUpdate();
+                      setcnt(voter.filter((data)=>(startTime<=data.date && data.date<=endTime)).length);
+                      //forceUpdate();
                       console.log("Set Time Value!");
                    }
                }>
